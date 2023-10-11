@@ -27,6 +27,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       
       - run: geckodriver --version
+
+      - name: Instalar dependências para lxml
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxml2-dev libxslt-dev
         
       - name: Instalar dependências
         run: |
