@@ -14,12 +14,12 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Clonar repositório leis-brasileiras
-        run: git clone https://github.com/MinisterioPublicoRJ/leis-brasileiras.git
+        run: git clone https://github.com/davidhsv/leis-brasileiras.git
 
       - name: Configurar Python
         uses: actions/setup-python@v2
         with:
-          python-version: 2.7
+          python-version: 3.9
 
       - name: Instalar Selenium
         uses: browser-actions/setup-geckodriver@latest
