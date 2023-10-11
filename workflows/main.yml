@@ -1,0 +1,41 @@
+name: Processar e transformar leis brasileiras
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  processar-leis:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v2
+
+      - name: Configurar Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Instalar dependências
+        run: |
+          pip install -r requirements.txt
+
+#      - name: Configurar Selenium e geckodriver
+#        # Necessário implementar a instalação e configuração
+
+      - name: Baixar e processar leis
+        run: |
+          python -m leis_brasileiras.download_leis --path leis.csv
+
+      - name: Transformar CSV em estrutura de Markdown com links Obsidian
+        run: |
+          python script_transform.py
+
+      - name: Commit e push
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add .
+          git commit -m "Atualização diária das leis"
+          git push
