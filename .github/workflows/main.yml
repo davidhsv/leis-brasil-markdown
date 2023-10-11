@@ -19,7 +19,13 @@ jobs:
       - name: Configurar Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9
+          python-version: 2.7
+
+      - name: Instalar Selenium
+        uses: browser-actions/setup-geckodriver@latest
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+            - run: geckodriver --version
 
       - name: Instalar dependências
         run: |
